@@ -101,8 +101,9 @@ import urllib.robotparser   # 主要是用来识别网站的robots.txt 文件，
 #     if isinstance(e.reason, socket.timeout):
 #         print("Time Out")
 
-"URL解析"
-from urllib.parse import urlparse
+# "URL解析"
+# from urllib.parse import urlparse
+#
+# result = urlparse('http://www.baidu.com/index.html;user?id=5#commit')
+# print(type(result), result)     # 简介格式：scheme://netloc/path;params?query*fragment
 
-result = urlparse('http://www.baidu.com/index.html;user?id=5#commit')
-print(type(result), result)
