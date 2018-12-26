@@ -1,0 +1,55 @@
+# -*- coding:utf-8 -*-
+
+import urllib.request   # 它是最基本的HTTP请求模块，可以用来模拟发送请
+import http.cookiejar   # 异常处理模块，如果出现请求错误， 我们可以捕获这些异常
+import urllib.response
+import urllib.parse     # 一个工具模块，提供了许多URL 处理方法，比如拆分、解析、合并等
+import urllib.request
+import urllib.robotparser   # 主要是用来识别网站的robots.txt 文件，然后判断哪些网站可以爬，哪些网站不可以爬
+
+"获取百度页面的源码"
+# response = urllib.request.urlopen("http://www.baidu.com")
+# print(response.read().decode('utf-8'))
+
+
+# respose = urllib.request.urlopen("https://www.python.org")
+# print(type(respose))
+# print(respose.status)             # 获取状态码
+# print(respose.getheaders())
+# print(respose.getheader('Server')) # 获取服务器类型
+# print(respose.read().decode('utf-8'))
+
+"data参数的使用"
+# data = bytes(urllib.parse.urlencode({'word': 'hello'}), encoding='utf-8')
+# response = urllib.request.urlopen('http://httpbin.org/post', data=data)
+# print(response.read().decode('utf-8'))
+
+"模拟POST请求"
+# from urllib import request, parse
+# url = 'http://httpbin.org/post'
+# headers = {
+#     'User-agent': 'Mozilla/4.0(compatible; MSIE 5.5 Windows NT)',
+#     'Host': 'httpbin.org'
+# }
+# dict = {'dictname': 'Germey'}
+# data = bytes(parse.urlencode(dict), encoding='utf8')
+# req = request.Request(url=url, data=data, headers=headers, method='POST')     # data参数必须传字节流，可通过bytes转换称字节
+# response = request.urlopen(req)
+# print(response. read().decode('utf-8'))
+
+" 获取cookie "
+# cookie = http.cookiejar.CookieJar()
+# handler = urllib.request.HTTPCookieProcessor(cookie)
+# opener = urllib.request.build_opener(handler)
+# response = opener.open("http://www.baidu.com")
+# for itme in cookie:
+#     print(itme.name+"="+itme.value)
+
+"保存cookie到文档"
+# filename = 'cookies.txt'
+# cookie = http.cookiejar.MozillaCookieJar(filename)
+# handler = urllib.request.HTTPCookieProcessor(cookie)
+# opener = urllib.request.build_opener(handler)
+# response = opener.open("http://www.baidu.com")
+# cookie.save(ignore_discard=True, ignore_expires=True)
+
