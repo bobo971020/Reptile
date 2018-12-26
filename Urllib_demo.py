@@ -1,11 +1,6 @@
 # -*- coding:utf-8 -*-
 
-import urllib.request   # 它是最基本的HTTP请求模块，可以用来模拟发送请
-import http.cookiejar   # 异常处理模块，如果出现请求错误， 我们可以捕获这些异常
-import urllib.response
-import urllib.parse     # 一个工具模块，提供了许多URL 处理方法，比如拆分、解析、合并等
-import urllib.request
-import urllib.robotparser   # 主要是用来识别网站的robots.txt 文件，然后判断哪些网站可以爬，哪些网站不可以爬
+import urllib
 
 "获取百度页面的源码"
 # response = urllib.request.urlopen("http://www.baidu.com")
@@ -101,9 +96,49 @@ import urllib.robotparser   # 主要是用来识别网站的robots.txt 文件，
 #     if isinstance(e.reason, socket.timeout):
 #         print("Time Out")
 
-# "URL解析"
+"URL解析"
 # from urllib.parse import urlparse
-#
-# result = urlparse('http://www.baidu.com/index.html;user?id=5#commit')
+# url = 'http://www.baidu.com/index.html;user?id=5#commit'
+# result = urlparse(url)
 # print(type(result), result)     # 简介格式：scheme://netloc/path;params?query*fragment
+
+# result = urllib.parse.urlparse(url="www.baidu.com", scheme="",allow_fragments="https")
+# print(result)
+
+"URL构造"
+# result = ['http', 'www.baidu.com', 'index.html', 'user', 'a=6', 'comment']
+# print(urllib.parse.urlunparse(result))  # 接受一个可迭代对象，长度必须是6
+# result = urllib.parse.urlsplit(url)
+# print(result)   # 功能与urlparse一致，只返回5个结果，不解析params（参数）部分
+
+"URL连接"
+# from urllib.parse import urljoin
+# print(urljoin("www.baidu.com", "https://www.baidu.com"))
+# print(urljoin("http://www.baidu.com", "index.html"))
+
+"urlencode方法"
+# from urllib.parse import urlencode
+# params = {
+#     'name': 'liubo',
+#     'age': 22
+# }
+# base_url = "http://www.baidu.com?"
+# url = base_url + urlencode(params)    # 将一个参数字典序列化
+# print(url)
+
+# from urllib.parse import quote
+# from urllib.parse import unquote
+# keyword = '壁纸'
+# url = 'https://www.baidu.com/s?wd=' + quote(keyword)    # 将中文转化为URL编码
+# print(url)
+# print(unquote(url))     # 将URL编码转化为中文
+
+"分析robots协议"
+from urllib.robotparser import RobotFileParser
+rp = RobotFileParser()
+rp.set_url("https://www.jianshu.com/robots.txt")
+rp.read()
+print(rp.can_fetch("*", "https://www.jianshu.com/p/d8b31d20a867"))      # 返回TURE或FLASE
+
+
 
