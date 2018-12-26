@@ -32,8 +32,8 @@ import urllib.robotparser   # 主要是用来识别网站的robots.txt 文件，
 #     'Host': 'httpbin.org'
 # }
 # dict = {'dictname': 'Germey'}
-# data = bytes(parse.urlencode(dict), encoding='utf8')
-# req = request.Request(url=url, data=data, headers=headers, method='POST')     # data参数必须传字节流，可通过bytes转换称字节
+# data = bytes(parse.urlencode(dict), encoding='utf8')              # 通过bytes转换称字节
+# req = request.Request(url=url, data=data, headers=headers, method='POST')
 # response = request.urlopen(req)
 # print(response. read().decode('utf-8'))
 
@@ -45,7 +45,7 @@ import urllib.robotparser   # 主要是用来识别网站的robots.txt 文件，
 # for itme in cookie:
 #     print(itme.name+"="+itme.value)
 
-"保存cookie到文档"
+"保存Cookie到文档"
 # filename = 'cookies.txt'
 # cookie = http.cookiejar.MozillaCookieJar(filename)
 # handler = urllib.request.HTTPCookieProcessor(cookie)
@@ -53,3 +53,56 @@ import urllib.robotparser   # 主要是用来识别网站的robots.txt 文件，
 # response = opener.open("http://www.baidu.com")
 # cookie.save(ignore_discard=True, ignore_expires=True)
 
+"另一种格式保存Cookie到文档"
+# filename = 'LWPcookies.txt'
+# cookie = http.cookiejar.LWPCookieJar(filename)
+# handler = urllib.request.HTTPCookieProcessor(cookie)
+# opener = urllib.request.build_opener(handler)
+# response = opener.open("http://www.baidu.com")
+# cookie.save(ignore_discard=True, ignore_expires=True)
+
+"Request使用"
+# request = urllib.request.Request("http://www.baidu.com")
+# response = urllib.request.urlopen(request)
+# print(response.read().decode('utf-8'))
+# print(dir(response))
+
+"代理配置"
+# from urllib.error import URLError
+# from urllib.request import ProxyHandler, build_opener
+# proxy_handler = ProxyHandler({
+#     'http': 'http://119.101.113.235:9999',  # https://www.kuaidaili.com/free/inha/  免费代理ip地址
+# })
+# opener = build_opener(proxy_handler)
+# try:
+#     response = opener.open("http://www.baidu.com", timeout=6)
+#     print(response.read().decode('utf-8'))
+# except URLError as e:
+#     print(e.reason)
+
+"异常处理"
+# from urllib import request, error
+#
+# try:
+#     response = request.urlopen('http://www.baidu.com')
+# except error.HTTPError as e:
+#     print(e.reason, e.code, e.headers, sep="\n")
+# except error.URLError as e:
+#     print(e.reason)
+# else:
+#     print("Request Successfully")
+
+# import socket
+# import urllib.error
+#
+# try:
+#     response = urllib.request.urlopen("https://www.baidu.com", timeout=0.01)
+# except urllib.error.URLError as e:
+#     if isinstance(e.reason, socket.timeout):
+#         print("Time Out")
+
+"URL解析"
+from urllib.parse import urlparse
+
+result = urlparse('http://www.baidu.com/index.html;user?id=5#commit')
+print(type(result), result)
