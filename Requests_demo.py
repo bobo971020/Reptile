@@ -53,4 +53,24 @@ import requests
 # with open("test.ico", "wb") as f:
 #     f.write(r.content)
 
+"上传文件"
+# import requests
+# file = {"file": (open("test.ico", "rb"))}
+# r = requests.post("http://httpbin.org/post",data=file)
+# print(r.text)
 
+"获取cookie"
+# import requests
+# r = requests.get("https://www.baidu.com")
+# print(r.cookies)
+# for key, value in r.cookies.items():
+#     print(key+"="+value)
+
+"SSL证书验证"
+# import logging
+# import requests
+# logging.captureWarnings(True)       # 捕捉警告并忽略
+# r = requests.get("https://www.12306.cn", verify=False)  # 跳过证书
+# print(r.status_code)
+# "指定证书"
+# # x = requests.get("https://www.12306.cn", cart=('path/server.crt', 'path/key'))  # 指定证书文件，包括证书和密钥
