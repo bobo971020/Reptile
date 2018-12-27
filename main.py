@@ -20,6 +20,7 @@ import re
 
 import re
 import os
+import time
 """
 获取QQ音乐热门音乐top300
 """
@@ -41,6 +42,11 @@ while song_begin < 300:
           "tpl=3&page=detail&date=2018_51&topid=26&type=top&song_begin=" + str(song_begin) + \
           "&song_num=30&g_tk=5381&loginUin=0&hostUin=0&format=json&inCharset=utf8" \
           "&outCharset=utf-8&notice=0&platform=yqq.json&needNewCode=0"
+    # url2 = "https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?" \
+    #        "tpl=3&page=detail&date=2018-12-27&topid=4&type=top&song_begin=" + str(song_begin)+ \
+    #        "&song_num=30&g_tk=5381&loginUin=0&hostUin=0&format=json&inCharset=utf8" \
+    #        "&outCharset=utf-8&notice=0&platform=yqq.json&needNewCode=0"
+
 
     prseon = requests.get(url, headers=header)
     if os.path.exists(htmlDome):
@@ -48,17 +54,20 @@ while song_begin < 300:
     else:
         with open(htmlDome, "a+", encoding='utf-8') as f:
             f.write(prseon.text)
-    MusicName = re.compile(r'lbumname\W{3}(.*?)\W{3}a', re.S)
+    MusicName = re.compile(r'songname\W{3}(.*?)\W{3}songorig', re.S)
     SingerName = re.compile(r'\Wname\W{3}(.*?)\W{5}[s|i]', re.S)
     musicname = re.findall(MusicName, prseon.text)
     singername = re.findall(SingerName, prseon.text)
-
+    # print(prseon.text)
+    # print(musicname)
+    # print(singername)
 
     for i in musicname:
         with open(file_name, "a+", encoding="utf-8") as w:
             w.write(str(rank)+"  ")
-            w.write(i+"\t\t\t")      # 将歌曲名字写入文件
-            w.write(singername[musicname.index(i)])
+            w.write(str(i)+"\t\t\t")      # 将歌曲名字写入文件
+            # w.write(singername[musicname.index(i)])    # DOTO:歌手未正确匹配，暂时弃用
+            time.sleep(0.05)
             w.write("\n")
             rank += 1
     song_begin += 30
