@@ -10,12 +10,12 @@ import urllib
 # respose = urllib.request.urlopen("https://www.python.org")
 # print(type(respose))
 # print(respose.status)             # 获取状态码
-# print(respose.getheaders())
+# print(respose.getheaders())       # 获取请求头
 # print(respose.getheader('Server')) # 获取服务器类型
 # print(respose.read().decode('utf-8'))
 
 "data参数的使用"
-# data = bytes(urllib.parse.urlencode({'word': 'hello'}), encoding='utf-8')
+# data = bytes(urllib.parse.urlencode({'word': 'hello'}), encoding='utf-8') # 使用时需将参数转化成字节流
 # response = urllib.request.urlopen('http://httpbin.org/post', data=data)
 # print(response.read().decode('utf-8'))
 
@@ -26,8 +26,10 @@ import urllib
 #     'User-agent': 'Mozilla/4.0(compatible; MSIE 5.5 Windows NT)',
 #     'Host': 'httpbin.org'
 # }
-# dict = {'dictname': 'Germey'}
-# data = bytes(parse.urlencode(dict), encoding='utf8')              # 通过bytes转换称字节
+# params = {
+#     'dictname': 'Germey'
+# }
+# data = bytes(parse.urlencode(params), encoding='utf8')              # 通过bytes转换称字节
 # req = request.Request(url=url, data=data, headers=headers, method='POST')
 # response = request.urlopen(req)
 # print(response. read().decode('utf-8'))
@@ -126,6 +128,7 @@ import urllib
 # url = base_url + urlencode(params)    # 将一个参数字典序列化
 # print(url)
 
+"URL编码转换"
 # from urllib.parse import quote
 # from urllib.parse import unquote
 # keyword = '壁纸'
@@ -135,10 +138,12 @@ import urllib
 
 "分析robots协议"
 from urllib.robotparser import RobotFileParser
-rp = RobotFileParser()
-rp.set_url("https://www.jianshu.com/robots.txt")
-rp.read()
-print(rp.can_fetch("*", "https://www.jianshu.com/p/d8b31d20a867"))      # 返回TURE或FLASE
+rp = RobotFileParser()      # 分析地址是否有robots协议，数据是否可被爬取
+rp.set_url("http://localhost/cms/upload/robots.txt")
+rp.read()       # 读取robots文件
+print(rp.can_fetch("*", "http://localhost/cms/upload/search.php?searchtype=5&tid=1&year=2018"))      # 返回TURE或FLASE
+
+
 
 
 
