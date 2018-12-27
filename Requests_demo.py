@@ -74,3 +74,15 @@ import requests
 # print(r.status_code)
 # "指定证书"
 # # x = requests.get("https://www.12306.cn", cart=('path/server.crt', 'path/key'))  # 指定证书文件，包括证书和密钥
+
+"代理设置"
+import json
+# proxies={
+#     # "http": "119.101.113.130:9999",
+# }
+#
+# r = requests.get("https://www.baidu.com", proxies=proxies)
+# print(r)
+# print(r.headers)
+# print(type(r))
+
