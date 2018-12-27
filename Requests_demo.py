@@ -38,15 +38,15 @@ import requests
 # print(type(r.json()))
 
 "获取知乎探索"
-# import re
-# headers = {
-#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
-# }
-# r = requests.get("https://www.zhihu.com/explore", headers=headers)
-# pattern = re.compile('explore-feed.*?question_link.*?>(.*?)</a>', re.S)
-# title = re.findall(pattern, r.text)
-# for i in title:
-#     print(i)
+import re
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+}
+r = requests.get("https://www.zhihu.com/explore", headers=headers)
+pattern = re.compile('explore-feed.*?question_link.*?>(.*?)</a>', re.S)
+title = re.findall(pattern, r.text)
+for i in title:
+    print(i)
 
 "获取GitHub icon保存"
 # r = requests.get("https://github.com/favicon.ico")
